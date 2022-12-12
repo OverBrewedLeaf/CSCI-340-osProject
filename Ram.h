@@ -10,6 +10,7 @@ public:
 
     void print();
     void kill(int);
+    int oldest();
     
 private:
     int size;

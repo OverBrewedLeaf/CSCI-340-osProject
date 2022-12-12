@@ -38,3 +38,8 @@ void Ram::kill(int pid)
         }
     }
 }
+
+int Ram::oldest()
+{
+    int min = frame
+}

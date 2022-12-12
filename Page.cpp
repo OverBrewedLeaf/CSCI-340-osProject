@@ -16,6 +16,11 @@ int Page::getPID()
     return pid;
 }
 
+int Page::getAge()
+{
+    return trueAge;
+}
+
 void Page::setPage(int pageNum)
 {
     page = pageNum;
@@ -36,3 +41,4 @@ void Page::kill()
     page = 0;
     pid = 0;
 }
+

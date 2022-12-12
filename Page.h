@@ -8,6 +8,7 @@ public:
     Page(int,int);
     int getPage();
     int getPID();
+    int getAge();
     void setPage(int);
     void setPID(int);
     void print();
@@ -17,4 +18,5 @@ private:
     int page;
     int pid;
     bool inCPU;
+    int trueAge;
 };
