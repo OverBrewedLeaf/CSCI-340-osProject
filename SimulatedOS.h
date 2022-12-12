@@ -24,6 +24,7 @@ private:
     Ram ram = Ram();
     std::vector<Disk> disk;
 
+    int diskSize;
     int pageSize;
     int programCounter;
     int pidCounter;

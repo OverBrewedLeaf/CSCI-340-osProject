@@ -1,18 +1,21 @@
 #include "Process.h"
 
-Process::Process(int prio, int processID,int timestamp)
+Process::Process()
+{
+    priority = 0;
+    pid = 0;
+    time = 0;
+    disk = false;
+    filename = "";
+}
+
+Process::Process(int prio, int processID, int timestamp)
 {
     priority = prio;
     pid = processID;
     time = timestamp;
     disk = false;
     filename = "";
-}
-
-Process::Process(Process copy, std::string file)
-{
-    disk = true;
-    filename = file;
 }
 
 int Process::getPriority()
@@ -32,4 +35,15 @@ void Process::kill()
     pid = 0;
     disk = false;
     filename = "";
+}
+
+std::string Process::getFilename()
+{
+    return filename;
+}
+
+void Process::setFilename(std::string name)
+{
+    disk = true;
+    filename = name;
 }

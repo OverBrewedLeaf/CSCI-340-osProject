@@ -35,6 +35,7 @@ int main()
 	// Instruction ignored: no disk with such number exists
 
 	osSim.DiskJobCompleted(0);
+	
 	osSim.PrintCPU();
 	// CPU: 3
 

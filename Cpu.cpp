@@ -27,7 +27,10 @@ void Cpu::printReadyQueue()
     std::cout << "Ready-Queue: ";
     for(Process x: readyQueue)
     {
-        std::cout << x.getPID() << " ";
+        if(x.getPID() > 0)
+        {
+            std::cout << x.getPID() << " ";
+        }
     }
     std::cout << std::endl;
 }
