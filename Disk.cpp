@@ -9,7 +9,7 @@ void Disk::print()
 {   
     if(waiting.getPID() == 0)
     {
-        std::cout << " Idle\n"; 
+        std::cout << ": Idle\n"; 
     }
     else
     {
