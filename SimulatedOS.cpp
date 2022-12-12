@@ -12,23 +12,22 @@ SimulatedOS::SimulatedOS(int numberOfDisks, int amountOfRAM, int page)
 
     disk.resize(numberOfDisks);
     diskSize = numberOfDisks;
-    ram = Ram(amountOfRAM/pageSize);
+    cpu = Cpu(amountOfRAM/page);
     pageSize = page;
-    programCounter = 0;
     pidCounter = 1;
+    ram = amountOfRAM;
+    
     return;
 }
 
 void SimulatedOS::NewProcess(int priority)
 {
-    cpu.addProcess(priority,pidCounter++,programCounter);
-    programCounter++;
+    cpu.addProcess(priority, pidCounter++);
 }
 
 void SimulatedOS::Exit()
 {
     cpu.exit();
-    ram.kill(cpu.getExecuting().getPID());
 }
 
 void SimulatedOS::DiskReadRequested(int diskNumber, std::string fileName)
@@ -41,14 +40,21 @@ void SimulatedOS::DiskReadRequested(int diskNumber, std::string fileName)
 
 void SimulatedOS::FetchFrom(unsigned int memoryAddress)
 {
-
+    if(memoryAddress > ram || memoryAddress < pageSize)
+    {
+        std::cout << "Memory Address invalid.\n";
+    }
+    else
+    {
+        std::cerr << "Fetched " << memoryAddress << "\n";
+        cpu.fetch(memoryAddress/pageSize);
+    }
 }
 
 void SimulatedOS::DiskJobCompleted(int diskNumber)
 {
     Process temp = disk.at(diskNumber).complete();
-    cpu.addProcess(temp.getPriority(),temp.getPID(),programCounter);
-    programCounter++;
+    cpu.addProcess(temp.getPriority(),temp.getPID());
 }
 
 void SimulatedOS::PrintCPU()
@@ -64,7 +70,7 @@ void SimulatedOS::PrintReadyQueue()
 void SimulatedOS::PrintRAM()
 {
     std::cout << "Frame\tPage\tPID\n";
-    ram.print();
+    cpu.printRAM();
 }
 
 void SimulatedOS::PrintDisk(int diskNumber)

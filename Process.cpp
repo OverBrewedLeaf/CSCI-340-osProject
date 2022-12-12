@@ -4,16 +4,14 @@ Process::Process()
 {
     priority = 0;
     pid = 0;
-    time = 0;
     disk = false;
     filename = "";
 }
 
-Process::Process(int prio, int processID, int timestamp)
+Process::Process(int prio, int processID)
 {
     priority = prio;
     pid = processID;
-    time = timestamp;
     disk = false;
     filename = "";
 }
@@ -31,7 +29,6 @@ int Process::getPID()
 void Process::kill()
 {
     priority = 0;
-    time = 0;
     pid = 0;
     disk = false;
     filename = "";

@@ -9,7 +9,7 @@ class Process
 public:
 
     Process();
-    Process(int,int,int);
+    Process(int,int);
     Process(Process, std::string);
     int getPriority();
     int getPID();
@@ -21,7 +21,6 @@ private:
 
     int priority;
     int pid;
-    int time;
     
     bool disk;
     std::string filename;

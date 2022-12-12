@@ -1,6 +1,5 @@
 #include "Cpu.h"
 #include "Disk.h"
-#include "Ram.h"
 
 class SimulatedOS
 {
@@ -21,12 +20,11 @@ public:
 
 private:
     Cpu cpu = Cpu();
-    Ram ram = Ram();
     std::vector<Disk> disk;
 
     int diskSize;
     int pageSize;
-    int programCounter;
+    int ram;
     int pidCounter;
     void update();
 };

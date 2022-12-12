@@ -5,12 +5,14 @@ class Page
 {   
 public:
 
-    Page(int,int);
+    Page(int,int,int);
     int getPage();
     int getPID();
     int getAge();
+    bool getCPU();
     void setPage(int);
     void setPID(int);
+    void setCPU(bool);
     void print();
     void kill();
 

@@ -10,9 +10,12 @@ public:
 
     void print();
     void kill(int);
-    int oldest();
+    void fetch(int,int);
+    void add(int,int,bool);
     
 private:
     int size;
+    int oldest();
+    int programCounter;
     std::vector<Page> frame;
 };
