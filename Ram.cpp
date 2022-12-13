@@ -2,7 +2,7 @@
 
 Ram::Ram()
 {
-    // size = 0;
+    size = 0;
 }
 
 Ram::Ram(int frames)
@@ -21,8 +21,8 @@ void Ram::print()
     {
         // if(frame.at(i).getPID() > 0)
         // {
-            std::cout   << i << "\t" << frame.at(i).getPage() 
-                        << "\t" << frame.at(i).getPID() << "\t" << frame.at(i).getCPU() * '*' << "\n";
+            std::cout   << i << "\t" << frame.at(i).getPage() << "\t" << frame.at(i).getPID() << "   ";
+            std::cerr  << char(frame.at(i).getCPU() * '*') << "\t" << frame.at(i).getAge() << "\n";
         // }
     }
     std::cout << "\n";
@@ -50,7 +50,6 @@ int Ram::oldest()
         }
         if(!frame.at(i).getCPU() && frame.at(i).getAge() < frame.at(min).getAge())
         {
-            std::cout << "is this running\n";
             min = i;
         }
     }
@@ -70,13 +69,13 @@ void Ram::add(int page, int pid, bool cpuState)
         {
             if(frame.at(i).getPage() == page && frame.at(i).getPID() == pid)
             {
-                frame.at(i).setCPU(true);
+                // frame.at(i).setCPU(true);
                 return;
             }
             frame.at(i).setCPU(false);
         }
     }
-    Page temp(page, pid, programCounter);
+    Page temp(page, pid, ++programCounter);
     temp.setCPU(cpuState);
     frame.at(oldest()) = temp;
 }

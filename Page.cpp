@@ -5,6 +5,7 @@ Page::Page(int pageNum, int pidNum, int age)
     page = pageNum;
     pid = pidNum;
     trueAge = age;
+    inCPU = false;
 }
 
 int Page::getPage()

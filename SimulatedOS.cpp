@@ -40,15 +40,15 @@ void SimulatedOS::DiskReadRequested(int diskNumber, std::string fileName)
 
 void SimulatedOS::FetchFrom(unsigned int memoryAddress)
 {
-    if(memoryAddress > ram || memoryAddress < pageSize)
-    {
-        std::cout << "Memory Address invalid.\n";
-    }
-    else
-    {
+    // if(memoryAddress > ram || memoryAddress < pageSize)
+    // {
+    //     std::cout << "Memory Address invalid.\n";
+    // }
+    // else
+    // {
         std::cerr << "Fetched " << memoryAddress << "\n";
         cpu.fetch(memoryAddress/pageSize);
-    }
+    // }
 }
 
 void SimulatedOS::DiskJobCompleted(int diskNumber)

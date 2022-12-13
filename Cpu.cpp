@@ -23,7 +23,6 @@ void Cpu::exit()
     ram.kill(executing.getPID());
     executing.kill();
     update();
-
 }
 
 void Cpu::printReadyQueue()
@@ -66,6 +65,7 @@ bool Cpu::addProcess(int prio, int pid)
     }
     queueSize++;
     readyQueue.push_back(Process(prio,pid));
+    ram.add(0,pid,false);
     update();
     return true;
 }
@@ -93,7 +93,7 @@ void Cpu::update()
             max = i;
         }
     }
-    if(change)
+    if(change)//cpu changing executing process
     {
         Process temp2 = executing;
         executing = temp;
