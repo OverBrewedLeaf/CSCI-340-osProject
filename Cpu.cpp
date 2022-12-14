@@ -2,13 +2,11 @@
 
 Cpu::Cpu()
 {
-    queueSize = 0;
     ram = Ram(0);
 }
 
 Cpu::Cpu(int ramSize)
 {
-    queueSize = 0;
     ram = Ram(ramSize);
 }
 
@@ -29,18 +27,16 @@ void Cpu::printReadyQueue()
 {
     std::vector<Process> temp;
     int tempQueueSize = 0;
-    for(int i = 0; i < queueSize; i++)
+    for(int i = 0; i < readyQueue.size(); i++)
     {
         if(readyQueue.at(i).getPID() > 0)
         {
             temp.push_back(readyQueue.at(i));
-            tempQueueSize++;
         }
     }
     readyQueue = temp;
-    queueSize = tempQueueSize;
     std::cout << "Ready-Queue: ";
-    if(queueSize == 0)
+    if(readyQueue.size() == 0)
     {
         std::cout << "Empty\n";
     }
@@ -57,17 +53,13 @@ void Cpu::printReadyQueue()
     }
 }
 
-bool Cpu::addProcess(int prio, int pid)
-{   
-    if(prio == executing.getPriority())
-    {
-        return false;
-    }
-    queueSize++;
-    readyQueue.push_back(Process(prio,pid));
-    ram.add(0,pid,false);
+void Cpu::addProcess(Process temp)
+{
+    temp.setFrame(ram.oldest());
+    readyQueue.push_back(temp);
+    ram.add(temp.getPage(),temp.getPID(),false);
+    ram.deselect();
     update();
-    return true;
 }
 
 void Cpu::printExecuting()
@@ -79,28 +71,34 @@ void Cpu::printExecuting()
     else std::cout << "Cpu: " << executing.getPID() << std::endl;
 }
 
+/*
+    CPU has to check for possible higher priorities and swap
+    If a swap occurs, Ram has to be updated
+    If no swap occurs, CPU age in ram must be updated
+*/
 void Cpu::update()
 {
     Process temp = executing;
-    bool change = false;
-    int max = 0;
-    for(int i = 0; i < queueSize; i++)
+    int max = -1;
+    for(int i = 0; i < readyQueue.size(); i++)
     {
         if(readyQueue.at(i).getPriority() > temp.getPriority())
         {
             temp = readyQueue.at(i);
-            change = true;
             max = i;
         }
     }
-    if(change)//cpu changing executing process
+    if(max > -1)//cpu changing executing process
     {
-        Process temp2 = executing;
+        readyQueue.push_back(executing);
         executing = temp;
-        ram.add(0,executing.getPID(),true);
-        readyQueue.push_back(temp2);
-        queueSize++;
-        readyQueue.at(max) = Process();
+        ram.add(executing.getPage(),executing.getPID(),true);
+        readyQueue.at(max) = Process();// remove old process from queue
+    }
+    else
+    {
+        ram.updateCPU();
+        programCounter++;
     }
     
 }
@@ -113,4 +111,12 @@ void Cpu::fetch(int memory)
 void Cpu::printRAM()
 {
     ram.print();
+}
+
+void Cpu::moveDisk()
+{
+    ram.deselect();
+    executing = Process();
+    update();
+    ram.updateCPU();
 }

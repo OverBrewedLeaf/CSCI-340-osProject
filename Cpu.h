@@ -14,16 +14,16 @@ Cpu(int);
 Process getExecuting();
 void exit();
 void printReadyQueue();
-bool addProcess(int,int);
+void addProcess(Process);
 void printExecuting();
 void fetch(int);
 void printRAM();
+void moveDisk();
 
 private:
-    Process executing = Process(0,0);
+    Process executing = Process();
     std::vector<Process> readyQueue;
     Ram ram = Ram();
-    int queueSize;
     int programCounter;
     void update();
 };

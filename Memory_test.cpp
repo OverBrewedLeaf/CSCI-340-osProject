@@ -58,43 +58,43 @@ int main()
 	// 1		1		1
 	// 2		0		3
 
-	osSim.Exit();
-	osSim.PrintRAM();
+	// osSim.Exit();
+	// osSim.PrintRAM();
 	// Frame	Page	PID
 	// 0		7		2
 	// 1		
 	// 2		0		3
 
-	osSim.FetchFrom(740);
-	osSim.PrintRAM();
-	// Frame	Page	PID
-	// 0		7		2
-	// 1		
-	// 2		0		3
+	// osSim.FetchFrom(740);
+	// osSim.PrintRAM();
+	// // Frame	Page	PID
+	// // 0		7		2
+	// // 1		
+	// // 2		0		3
 
-	osSim.FetchFrom(3350);
-	osSim.PrintRAM();
-	// Frame	Page	PID
-	// 0		7		2
-	// 1		33		2
-	// 2		0		3
+	// osSim.FetchFrom(3350);
+	// osSim.PrintRAM();
+	// // Frame	Page	PID
+	// // 0		7		2
+	// // 1		33		2
+	// // 2		0		3
 
-	osSim.FetchFrom(740);
-	// The page 7 of the process 2 is already in memory. RAM snapshot doesn't change but 
-	// your simulation remembers that the page 7 is now freshly used.
-	osSim.PrintRAM();
-	// Frame	Page	PID
-	// 0		7		2
-	// 1		33		2
-	// 2		0		3
+	// osSim.FetchFrom(740);
+	// // The page 7 of the process 2 is already in memory. RAM snapshot doesn't change but 
+	// // your simulation remembers that the page 7 is now freshly used.
+	// osSim.PrintRAM();
+	// // Frame	Page	PID
+	// // 0		7		2
+	// // 1		33		2
+	// // 2		0		3
 
-	osSim.NewProcess(20);
-	osSim.FetchFrom(100);
-	osSim.PrintRAM();
-	// Frame	Page	PID
-	// 0		7		2
-	// 1		1		4
-	// 2		0		4
+	// osSim.NewProcess(20);
+	// osSim.FetchFrom(100);
+	// osSim.PrintRAM();
+	// // Frame	Page	PID
+	// // 0		7		2
+	// // 1		1		4
+	// // 2		0		4
 
 	return 0;
 }

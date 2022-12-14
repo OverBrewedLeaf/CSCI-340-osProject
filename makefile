@@ -4,9 +4,11 @@ test: mytest.cpp ${files}
 	./test
 	rm test
 
-mem: Memory_test.cpp ${files}
+memory: Memory_test.cpp ${files}
 	clear
 	g++ Memory_test.cpp ${files} -o memory
+	./memory
+	rm memory
 
 main: main.cpp ${files}
 	clear

@@ -22,7 +22,8 @@ SimulatedOS::SimulatedOS(int numberOfDisks, int amountOfRAM, int page)
 
 void SimulatedOS::NewProcess(int priority)
 {
-    cpu.addProcess(priority, pidCounter++);
+    std::cerr << "New Process: PID: " << pidCounter << ", Prio: " << priority << std::endl;
+    cpu.addProcess(Process(0,priority,pidCounter++));
 }
 
 void SimulatedOS::Exit()
@@ -32,10 +33,11 @@ void SimulatedOS::Exit()
 
 void SimulatedOS::DiskReadRequested(int diskNumber, std::string fileName)
 {
+    std::cerr << "Disk Read: " << diskNumber << std::endl;
     Process temp = cpu.getExecuting();
     temp.setFilename(fileName);
     disk.at(diskNumber).addProcess(temp);
-    cpu.exit();
+    cpu.moveDisk();
 }
 
 void SimulatedOS::FetchFrom(unsigned int memoryAddress)
@@ -53,8 +55,9 @@ void SimulatedOS::FetchFrom(unsigned int memoryAddress)
 
 void SimulatedOS::DiskJobCompleted(int diskNumber)
 {
+    std::cerr << "Disk Job Completed, Disk: " << diskNumber << "\n";
     Process temp = disk.at(diskNumber).complete();
-    cpu.addProcess(temp.getPriority(),temp.getPID());
+    cpu.addProcess(temp);
 }
 
 void SimulatedOS::PrintCPU()

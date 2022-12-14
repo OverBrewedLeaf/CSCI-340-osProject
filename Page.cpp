@@ -52,6 +52,11 @@ void Page::kill()
 {
     page = 0;
     pid = 0;
+    trueAge = 0;
     inCPU = false;
 }
 
+void Page::setAge(int age)
+{
+    trueAge = age;
+}

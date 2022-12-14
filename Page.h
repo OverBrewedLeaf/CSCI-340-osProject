@@ -13,6 +13,7 @@ public:
     void setPage(int);
     void setPID(int);
     void setCPU(bool);
+    void setAge(int);
     void print();
     void kill();
 

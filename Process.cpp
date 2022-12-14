@@ -6,10 +6,13 @@ Process::Process()
     pid = 0;
     disk = false;
     filename = "";
+    ramFrame = -1;
+    ramPage = 0;
 }
 
-Process::Process(int prio, int processID)
+Process::Process(int page, int prio, int processID)
 {
+    ramPage = page;
     priority = prio;
     pid = processID;
     disk = false;
@@ -43,4 +46,25 @@ void Process::setFilename(std::string name)
 {
     disk = true;
     filename = name;
+}
+
+
+int Process::getFrame()
+{
+    return ramFrame;
+}
+
+void Process::setFrame(int frame)
+{
+    ramFrame = frame;
+}
+
+int Process::getPage()
+{
+    return ramPage;
+}
+
+void Process::setPage(int page)
+{
+    ramPage = page;
 }
