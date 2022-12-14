@@ -65,6 +65,7 @@ void Ram::fetch(int pageNum, int pid)
     {
         if(pageNum == frame.at(i).getPage() && pid == frame.at(i).getPID())
         {
+            frame.at(i).setAge(++programCounter);
             return;
         }
         frame.at(i).setCPU(false);
