@@ -21,12 +21,13 @@ void Ram::print()
 {
     for(int i = 0; i < size; i++)
     {
+        std::cout << i << "\t";
         if(frame.at(i).getPID() > 0)
         {
-            std::cout   << i << "\t" << frame.at(i).getPage() << "\t" << frame.at(i).getPID() << "   ";
+            std::cout << frame.at(i).getPage() << "\t" << frame.at(i).getPID() << "   ";
             // std::cerr  << char(frame.at(i).getCPU() * '*') << "\t" << frame.at(i).getAge();
-            std::cout << std::endl;
         }
+        std::cout << std::endl;
     }
     std::cout << "\n";
 }
@@ -84,7 +85,10 @@ void Ram::add(int page, int pid, bool cpuState)
         {
             if(frame.at(i).getPage() == page && frame.at(i).getPID() == pid)
             {
+                // std::cerr << "Page: " << page << "\tPID: " << pid << "\n";
+                programCounter++;
                 frame.at(i).setCPU(true);
+                // std::cerr << "Frame: Page: " << frame.at(i).getPage() << "\tPID: " << frame.at(i).getPID() << "\n";
                 return;
             }
             frame.at(i).setCPU(false);

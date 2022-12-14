@@ -55,9 +55,10 @@ void Cpu::printReadyQueue()
 
 void Cpu::addProcess(Process temp)
 {
-    temp.setFrame(ram.oldest());
+    // temp.setFrame(ram.oldest()); // temp should replace oldest frame... unless temp exists within ram already
+    // std::cerr << "CPU: Page: " << temp.getPage() << "\tPID: " << temp.getPID() << "\n";
     readyQueue.push_back(temp);
-    ram.add(temp.getPage(),temp.getPID(),false);
+    ram.add(temp.getPage(),temp.getPID(),true);
     ram.deselect();
     update();
 }

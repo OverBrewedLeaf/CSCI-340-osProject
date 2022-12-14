@@ -35,7 +35,7 @@ void SimulatedOS::DiskReadRequested(int diskNumber, std::string fileName)
 {
     // std::cerr << "Disk Read: " << diskNumber << std::endl;
     Process temp = cpu.getExecuting();
-    // std::cerr << "Process\tPage: " << temp.getPage() << "\tPID: " << temp.getPID() << std::endl;
+    // std::cerr << "Disk Read Page: " << temp.getPage() << "\tPID: " << temp.getPID() << std::endl;
     temp.setFilename(fileName);
     disk.at(diskNumber).addProcess(temp);
     cpu.moveDisk();
@@ -58,6 +58,7 @@ void SimulatedOS::DiskJobCompleted(int diskNumber)
 {
     // std::cerr << "Disk Job Completed, Disk: " << diskNumber << "\n";
     Process temp = disk.at(diskNumber).complete();
+    // std::cerr << "SimOS: Page: " << temp.getPage() << "\tPID: " << temp.getPID() << "\n";
     cpu.addProcess(temp);
 }
 

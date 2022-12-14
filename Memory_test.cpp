@@ -17,7 +17,7 @@ int main()
 	// Frame	Page	PID
 	// 0		0		1
 	// 1		0		2
-	// 2		0		0
+	// 2
 
 	osSim.FetchFrom(120);
 	osSim.PrintRAM();
