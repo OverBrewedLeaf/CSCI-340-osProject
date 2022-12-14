@@ -35,6 +35,7 @@ void SimulatedOS::DiskReadRequested(int diskNumber, std::string fileName)
 {
     std::cerr << "Disk Read: " << diskNumber << std::endl;
     Process temp = cpu.getExecuting();
+    std::cerr << "Process\tPage: " << temp.getPage() << "\tPID: " << temp.getPID() << std::endl;
     temp.setFilename(fileName);
     disk.at(diskNumber).addProcess(temp);
     cpu.moveDisk();

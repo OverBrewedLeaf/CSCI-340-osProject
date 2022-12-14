@@ -106,6 +106,7 @@ void Cpu::update()
 void Cpu::fetch(int memory)
 {
     ram.fetch(memory,executing.getPID());
+    executing.setPage(memory);
 }
 
 void Cpu::printRAM()
