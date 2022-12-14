@@ -21,11 +21,12 @@ void Ram::print()
 {
     for(int i = 0; i < size; i++)
     {
-        // if(frame.at(i).getPID() > 0)
-        // {
+        if(frame.at(i).getPID() > 0)
+        {
             std::cout   << i << "\t" << frame.at(i).getPage() << "\t" << frame.at(i).getPID() << "   ";
-            std::cerr  << char(frame.at(i).getCPU() * '*') << "\t" << frame.at(i).getAge() << "\n";
-        // }
+            // std::cerr  << char(frame.at(i).getCPU() * '*') << "\t" << frame.at(i).getAge();
+            std::cout << std::endl;
+        }
     }
     std::cout << "\n";
 }

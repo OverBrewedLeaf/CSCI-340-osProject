@@ -22,7 +22,7 @@ SimulatedOS::SimulatedOS(int numberOfDisks, int amountOfRAM, int page)
 
 void SimulatedOS::NewProcess(int priority)
 {
-    std::cerr << "New Process: PID: " << pidCounter << ", Prio: " << priority << std::endl;
+    // std::cerr << "New Process: PID: " << pidCounter << ", Prio: " << priority << std::endl;
     cpu.addProcess(Process(0,priority,pidCounter++));
 }
 
@@ -33,9 +33,9 @@ void SimulatedOS::Exit()
 
 void SimulatedOS::DiskReadRequested(int diskNumber, std::string fileName)
 {
-    std::cerr << "Disk Read: " << diskNumber << std::endl;
+    // std::cerr << "Disk Read: " << diskNumber << std::endl;
     Process temp = cpu.getExecuting();
-    std::cerr << "Process\tPage: " << temp.getPage() << "\tPID: " << temp.getPID() << std::endl;
+    // std::cerr << "Process\tPage: " << temp.getPage() << "\tPID: " << temp.getPID() << std::endl;
     temp.setFilename(fileName);
     disk.at(diskNumber).addProcess(temp);
     cpu.moveDisk();
@@ -49,14 +49,14 @@ void SimulatedOS::FetchFrom(unsigned int memoryAddress)
     // }
     // else
     // {
-        std::cerr << "Fetched " << memoryAddress << "\n";
+        // std::cerr << "Fetched " << memoryAddress << "\n";
         cpu.fetch(memoryAddress/pageSize);
     // }
 }
 
 void SimulatedOS::DiskJobCompleted(int diskNumber)
 {
-    std::cerr << "Disk Job Completed, Disk: " << diskNumber << "\n";
+    // std::cerr << "Disk Job Completed, Disk: " << diskNumber << "\n";
     Process temp = disk.at(diskNumber).complete();
     cpu.addProcess(temp);
 }

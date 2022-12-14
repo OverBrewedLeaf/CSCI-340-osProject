@@ -17,7 +17,7 @@ Process Cpu::getExecuting()
 
 void Cpu::exit()
 {
-    std::cerr << "Exited CPU PID: " << executing.getPID() << "\n";
+    // std::cerr << "Exited CPU PID: " << executing.getPID() << "\n";
     ram.kill(executing.getPID());
     executing.kill();
     update();
