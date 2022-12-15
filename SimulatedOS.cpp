@@ -1,3 +1,4 @@
+//Jeffrey Li
 #include "SimulatedOS.h"
 
 SimulatedOS::SimulatedOS(int numberOfDisks, int amountOfRAM, int page)

@@ -21,6 +21,7 @@ int main()
 	// Ready-Queue: 1 2
 
 	osSim.DiskReadRequested(0, "HW.txt");
+	osSim.DiskReadRequested(0, "HW2.txt");
 
 	osSim.PrintCPU();
 	// CPU: 1
@@ -31,7 +32,9 @@ int main()
 	osSim.PrintDiskQueue(0);
 	// Disk 0 I/O-queue: Empty
 
-	osSim.PrintDiskQueue(5);
+	osSim.DiskJobCompleted(0);
+
+	osSim.PrintDiskQueue(0);
 	// Instruction ignored: no disk with such number exists
 
 	osSim.DiskJobCompleted(0);
